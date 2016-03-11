@@ -1,8 +1,5 @@
 package first;
 
-/**
- * Created by PolinaDomnina on 07.03.2016.
- */
 public class GroundVisor {
     private Ground ground;
 
@@ -13,6 +10,6 @@ public class GroundVisor {
     public boolean hasObstacles(int x,int y) throws GroundVisorException {
         if ((x>ground.getLength())||(y>ground.getWidth()))
             throw new GroundVisorException();
-        return false;
+        return (ground.getLandscape()[x][y].getState().equals(CellState.OCCUPIED))? true : false;
     }
 }

@@ -1,22 +1,24 @@
 package first;
 
-/**
- * Created by PolinaDomnina on 27.02.2016.
- */
-public class Rover implements Turnable, Moveable{
+import first.command.RoverCommandParser;
+
+public class Rover implements Turnable, Moveable, ProgramFileAware{
     private Direction direction;
     private GroundVisor groundVisor;
     private int x;
     private int y;
+    private RoverCommandParser programParser;
     @Override
     public void move(int x, int y){
-        this.x=x;
-        this.y=y;
-        if (!groundVisor.hasObstacles(x,y))
-            System.out.println("Success!");
+        if(!groundVisor.hasObstacles(x,y));
+        {
+            this.x = x;
+            this.y = y;
+        }
     }
     public Rover(){
         groundVisor=new GroundVisor();
+        programParser=new RoverCommandParser();
     }
     @Override
     public void turnTo(Direction direction){
@@ -24,5 +26,10 @@ public class Rover implements Turnable, Moveable{
     }
     public GroundVisor getVisor(){
         return this.groundVisor;
+    }
+
+    @Override
+    public void executeProgramFile(String file) {
+
     }
 }
