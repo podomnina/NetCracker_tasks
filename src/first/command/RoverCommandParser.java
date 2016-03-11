@@ -10,4 +10,5 @@ public class RoverCommandParser {
     public RoverCommandParser(Rover rover){
 
     }
+    public RoverCommandParser(){}
 }
