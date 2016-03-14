@@ -1,6 +1,8 @@
 package first;
 
-public class GroundVisor {
+import java.io.Serializable;
+
+public class GroundVisor implements Serializable{
     private Ground ground;
 
     public void setGround(Ground ground){

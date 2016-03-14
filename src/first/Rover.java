@@ -1,8 +1,12 @@
 package first;
 
+import first.command.RoverCommand;
 import first.command.RoverCommandParser;
 
-public class Rover implements Turnable, Moveable, ProgramFileAware{
+import java.io.*;
+
+public class Rover implements Turnable, Moveable, ProgramFileAware, Serializable{
+    private static final long serialVersionUID = 8487956070498203558L;
     private Direction direction;
     private GroundVisor groundVisor;
     private int x;
@@ -14,22 +18,27 @@ public class Rover implements Turnable, Moveable, ProgramFileAware{
         {
             this.x = x;
             this.y = y;
+            System.out.println("Moved to x="+x+"  y="+y+"!!!");
         }
     }
     public Rover(){
         groundVisor=new GroundVisor();
-        programParser=new RoverCommandParser();
     }
     @Override
     public void turnTo(Direction direction){
         this.direction=direction;
+        System.out.println("Direction is "+direction+"!");
     }
     public GroundVisor getVisor(){
         return this.groundVisor;
     }
 
     @Override
-    public void executeProgramFile(String file) {
+    public void executeProgramFile(String file) throws IOException, ClassNotFoundException {
+        programParser = new RoverCommandParser(this,file);
+        while (programParser.checkEndOfList())
+            programParser.readNextCommand().execute();
 
     }
+
 }

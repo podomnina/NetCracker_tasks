@@ -1,6 +1,9 @@
 package first;
 
-public class Ground {
+import java.awt.*;
+import java.io.Serializable;
+
+public class Ground implements Serializable{
     private GroundCell [][] landscape;
     private int length;
     private int width;
