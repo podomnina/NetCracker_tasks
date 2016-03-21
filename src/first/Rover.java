@@ -1,7 +1,13 @@
 package first;
 
-import first.command.RoverCommand;
+import first.*;
+import first.Logging.LoggingCommand;
+import first.Logging.MoveLoggingCommand;
+import first.Logging.TurnLoggingCommand;
+import first.command.MoveCommand;
 import first.command.RoverCommandParser;
+import first.command.TurnCommand;
+
 
 import java.io.*;
 
@@ -44,9 +50,13 @@ public class Rover implements Turnable, Moveable, ProgramFileAware{
         programParser = new RoverCommandParser(this);
         programParser.setFile(file);
         programParser.Read();
-        while (programParser.checkEndOfList())
-            programParser.readNextCommand().execute();
-
+        LoggingCommand log;
+        while (programParser.checkEndOfList()) {
+            log = new TurnLoggingCommand(new MoveLoggingCommand(programParser.readNextCommand()));
+            log.execute();
+            log.printCommand();
+            //programParser.readNextCommand().execute();
+        }
     }
 
 }

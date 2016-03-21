@@ -7,9 +7,11 @@ import first.Turnable;
 public class TurnCommand implements RoverCommand{
     private Turnable turn;
     private Direction direction;
+
     @Override
     public void execute() {
         turn.turnTo(direction);
+
     }
     public TurnCommand(Turnable turnable, Direction direction){
         this.turn = turnable;

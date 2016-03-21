@@ -2,6 +2,7 @@ move(3,7);
 turnTo(NORTH);
 move(10,10);
 move(5,5);
+import 2.txt;
 turnTo(WEST);
 turnTo(EAST);
 turnTo(SOUTH);

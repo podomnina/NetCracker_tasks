@@ -26,14 +26,15 @@ public class RoverCommandParser {
     }
     public LinkedList<RoverCommand> readFile(String file){
         LinkedList<RoverCommand> list=new LinkedList<>();
+        String pattern1="(.+)\\((\\d+),(\\d+)\\);";
+        String pattern2="(.+)\\((.+)\\);";
+        String pattern3="^import (.+);$";
         try{
             BufferedReader in = new BufferedReader(new FileReader(file));
             String command;
             do {
                 command=in.readLine();
                 if (command!=null) {
-                    String pattern1="(.+)\\((\\d+),(\\d+)\\);";
-                    String pattern2="(.+)\\((.+)\\);";
                     Pattern p = Pattern.compile(pattern1);
                     Matcher m = p.matcher(command);
                     if (m.find()) {
@@ -46,6 +47,15 @@ public class RoverCommandParser {
                         if (m.find()) {
                             TurnCommand com = new TurnCommand(rover, m.group(2));
                             list.add(com);
+                        }
+                        else {
+                            p=Pattern.compile(pattern3);
+                            m=p.matcher(command);
+                            if (m.find()){
+                                LinkedList<RoverCommand> newList = readFile(m.group(1));
+                                ImportCommand imp = new ImportCommand(list);
+                                imp.addCollection(newList);
+                            }
                         }
                     }
                 }
