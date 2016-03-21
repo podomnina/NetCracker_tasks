@@ -1,12 +1,10 @@
 package first.command;
 
 import first.Direction;
-import first.Rover;
 import first.Turnable;
 
-import java.io.Serializable;
 
-public class TurnCommand implements RoverCommand,Serializable{
+public class TurnCommand implements RoverCommand{
     private Turnable turn;
     private Direction direction;
     @Override
@@ -17,5 +15,9 @@ public class TurnCommand implements RoverCommand,Serializable{
         this.turn = turnable;
         this.direction=direction;
     }
-    public TurnCommand(){}
+    public TurnCommand(Turnable turnable, String direction){
+        this.direction = Direction.valueOf(direction);
+        this.turn = turnable;
+
+    }
 }

@@ -1,0 +1,7 @@
+move(3,7);
+turnTo(NORTH);
+move(10,10);
+move(5,5);
+turnTo(WEST);
+turnTo(EAST);
+turnTo(SOUTH);

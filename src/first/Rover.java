@@ -5,8 +5,7 @@ import first.command.RoverCommandParser;
 
 import java.io.*;
 
-public class Rover implements Turnable, Moveable, ProgramFileAware, Serializable{
-    private static final long serialVersionUID = 8487956070498203558L;
+public class Rover implements Turnable, Moveable, ProgramFileAware{
     private Direction direction;
     private GroundVisor groundVisor;
     private int x;
@@ -14,11 +13,16 @@ public class Rover implements Turnable, Moveable, ProgramFileAware, Serializable
     private RoverCommandParser programParser;
     @Override
     public void move(int x, int y){
-        if(!groundVisor.hasObstacles(x,y));
-        {
-            this.x = x;
-            this.y = y;
-            System.out.println("Moved to x="+x+"  y="+y+"!!!");
+        try {
+            if (!groundVisor.hasObstacles(x, y)) ;
+            {
+                this.x = x;
+                this.y = y;
+                System.out.println("Moved to x=" + x + "  y=" + y + "!!!");
+            }
+        }
+        catch (GroundVisorException e){
+            System.out.println("Out of bounds exception!");
         }
     }
     public Rover(){
@@ -26,6 +30,7 @@ public class Rover implements Turnable, Moveable, ProgramFileAware, Serializable
     }
     @Override
     public void turnTo(Direction direction){
+
         this.direction=direction;
         System.out.println("Direction is "+direction+"!");
     }
@@ -35,7 +40,10 @@ public class Rover implements Turnable, Moveable, ProgramFileAware, Serializable
 
     @Override
     public void executeProgramFile(String file) throws IOException, ClassNotFoundException {
-        programParser = new RoverCommandParser(this,file);
+
+        programParser = new RoverCommandParser(this);
+        programParser.setFile(file);
+        programParser.Read();
         while (programParser.checkEndOfList())
             programParser.readNextCommand().execute();
 

@@ -2,9 +2,7 @@ package first.command;
 
 import first.Moveable;
 
-import java.io.Serializable;
-
-public class MoveCommand implements RoverCommand, Serializable {
+public class MoveCommand implements RoverCommand {
     private Moveable move;
     private int x;
     private int y;

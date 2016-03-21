@@ -1,8 +1,6 @@
 package first;
 
-import java.io.Serializable;
-
-public class GroundCell implements Serializable{
+public class GroundCell {
     private CellState state;
     private int x;
     private int y;
