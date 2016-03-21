@@ -22,4 +22,8 @@ public class TurnCommand implements RoverCommand{
         this.turn = turnable;
 
     }
+    @Override
+    public String toString(){
+        return "turn";
+    }
 }

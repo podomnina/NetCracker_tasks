@@ -32,21 +32,22 @@ public class RoverCommandParser {
         try{
             BufferedReader in = new BufferedReader(new FileReader(file));
             String command;
+            LoggingCommand loggingCommand;
             do {
                 command=in.readLine();
                 if (command!=null) {
                     Pattern p = Pattern.compile(pattern1);
                     Matcher m = p.matcher(command);
                     if (m.find()) {
-                        MoveCommand com = new MoveCommand(rover,Integer.parseInt(m.group(2)),Integer.parseInt(m.group(3)));
-                        list.add(com);
+                        loggingCommand =new LoggingCommand(new MoveCommand(rover,Integer.parseInt(m.group(2)),Integer.parseInt(m.group(3))));
+                        list.add(loggingCommand);
                     }
                     else {
                         p=Pattern.compile(pattern2);
                         m=p.matcher(command);
                         if (m.find()) {
-                            TurnCommand com = new TurnCommand(rover, m.group(2));
-                            list.add(com);
+                            loggingCommand = new LoggingCommand(new TurnCommand(rover, m.group(2)));
+                            list.add(loggingCommand);
                         }
                         else {
                             p=Pattern.compile(pattern3);
