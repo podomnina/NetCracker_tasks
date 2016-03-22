@@ -13,6 +13,9 @@ public class RoverCommandParser {
     private Iterator<RoverCommand> iterator;
     private String file;
     private Rover rover;
+    private static final String pattern1="(.+)\\((\\d+),(\\d+)\\);";
+    private static final String pattern2="(.+)\\((.+)\\);";
+    private static final String pattern3="^import (.+);$";
 
     public RoverCommand readNextCommand(){
         return iterator.next();
@@ -26,9 +29,7 @@ public class RoverCommandParser {
     }
     public LinkedList<RoverCommand> readFile(String file){
         LinkedList<RoverCommand> list=new LinkedList<>();
-        String pattern1="(.+)\\((\\d+),(\\d+)\\);";
-        String pattern2="(.+)\\((.+)\\);";
-        String pattern3="^import (.+);$";
+        
         try{
             BufferedReader in = new BufferedReader(new FileReader(file));
             String command;
